@@ -1,43 +1,24 @@
-from subprocess import check_call, check_output
 import time
-import datetime
-import argparse
 from uiautomator import Device
-import pytz
+import datatest
 
-def GoHome():
-    while(d.press.home()):
-        time.sleep(1)
-    time.sleep(1)
+Number = datatest.getPhoneNumber()
 
-def SafeClick(button):
-    if(button.count != 0):
-        button.click()
-        time.sleep(1)
-
-d = Device()
-
-Number = input("Introduzca numero a marcar --> ")
-
-GoHome()
+datatest.GoHome()
 
 #print(d.click(204,1743))
-SafeClick(d(description="Teléfono"))
-time.sleep(1)
+datatest.SafeClick(datatest.d(description="Teléfono"))
 
 #Click Ajustes
-SafeClick(d(text="Teclado"))
-time.sleep(1)
+datatest.SafeClick(datatest.d(text="Teclado"))
 
-d.long_click(755,1542)
-time.sleep(1)
+datatest.SafeLongClick(datatest.d(description="Botón Eliminar último dígito"))
 
-for i in Number:
-    SafeClick(d(description=i))
+datatest.ClickPhone(Number)
 
 #Click Perfil Fuera de Linea
-SafeClick(d(descriptionContains="Llamar"))
+#SafeClick(d(descriptionContains="Llamar"))
 #time.sleep(1)
 
 #Click Desactivado
-GoHome()    
+#datatest.GoHome()
